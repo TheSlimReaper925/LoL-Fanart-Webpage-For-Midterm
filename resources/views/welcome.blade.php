@@ -104,7 +104,7 @@
         @if (Route::has('login'))
             @auth
                 <li class="nav-item active my-2 my-lg-0">
-                    <a class="nav-link" href="{{ url('/home') }}">Add Post</a>
+                    <a class="nav-link" href="{{ url('/home') }}">My page</a>
                 </li>
             @else
                 <li class="nav-item active mr-sm-2"><a class="nav-link" href="{{ route('login') }}">Login</a></li>
@@ -126,9 +126,48 @@
         </div>
         </div>
 
+        @foreach($posts as $post)
+            <div class="container card mt-2" style="width: 32rem;">
+            <img src="{{ asset('images')."/".$post->img_url }}" class="card-img-top" alt="img not found">
+                <div class="card-body">
+                    <h5 class="card-title">{{ $post->champion }} // {{$post["OwnerUser"]["username"]}} </h5>
+                    <p>{{$post->description}}</p>
+                    <p id="likes{{$post->id}}">{{$post["like"]->count()}}</p>
+                    @csrf
+                    @guest
+                    <a href="{{ route('login') }}" class="alert-danger">Register/Login to like!</a>
+                    @else
+                    <button class="btn btn-success" onclick="addLike({{$post->id}})">Like</button>
+                    @endguest
+                        
+                    <form action="{{ route('showcomments', ["id"=> $post->id ]) }}" method="get">
+                        <button class="btn btn-primary">Comments</button>
+                    </form>
+
+                </div>
+            </div>
+        @endforeach
+
     
 
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js" ></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+        <script type="text/javascript">
+            function addLike(id) {
+                $.ajax({
+                        method: "POST",
+                        url: "{{ route('addlike') }}",                
+                        data:{
+                          id:id,
+                          _token:$("input[name='_token']").val(),
+                        },                            
+                        success: function(data) {
+                            if(data==1){
+                                $("#likes"+id).html(parseInt($("#likes"+id).html()) + 1)
+                            }
+                        },                
+                    });
+                }
+        </script>
     </body>
 </html>

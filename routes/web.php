@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('welcome');
+Route::get ('/','GuestController@firstpage')->name('firstpage');
 
 Route::get('/app', function(){
 	return view('layouts.app');
@@ -23,4 +21,23 @@ Auth::routes(["verify"=>true]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/test', 'HomeController@testpage')->name('test');
+
 Route::post('/storePost', 'PostsController@storePosts')->name('storePosts');
+
+Route::get('/editPost/{id}', 'PostsController@edit')->name('edit');
+
+Route::post('/updatepost', 'PostsController@update')->name('updatepost');
+
+Route::post("/delete", "PostsController@delete")->name("adminDelete");
+
+Route::post('/addlike', "LikesController@addlike")->name("addlike");
+
+Route::get('/addcomments/{id}', "HomeController@showcomments")->name("showcomments");
+
+Route::post('/storeComment', "HomeController@storeComment")->name('storeComments');
+
+Route::post('/addcommentlike', "HomeController@storeLikes")->name('storelikes');
+
+
+
