@@ -39,5 +39,6 @@ Route::post('/storeComment', "HomeController@storeComment")->name('storeComments
 
 Route::post('/addcommentlike', "HomeController@storeLikes")->name('storelikes');
 
+Route::post('/search', "GuestController@search")->name('searchChamp');
 
 

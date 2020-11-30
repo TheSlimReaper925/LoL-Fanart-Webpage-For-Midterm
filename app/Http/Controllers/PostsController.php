@@ -45,6 +45,8 @@ class PostsController extends Controller
             "description"=>$request->input("description"),
             "champion"=>$request->input("champion")
         ]);
+
+        return redirect()->route('firstpage');
     }
 
     public function delete(Request $request)

@@ -11,4 +11,10 @@ class GuestController extends Controller
         $posts = Posts::with(['OwnerUser','like'])->get();
         return view('welcome', ["posts"=>$posts]);
     }
+
+    public function search(Request $request){
+    	$result = Posts::with(['OwnerUser', 'like'])->where('champion', $request->input('champion'))->get();
+
+    	return view('search', ["results"=>$result]);
+    }
 }

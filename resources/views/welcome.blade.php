@@ -12,7 +12,6 @@
         <!-- Styles -->
         <style>
             html, body {
-                background-color: #F8FAFC;
                 color: #fff;
                 font-family: 'Nunito', sans-serif;
                 font-weight: 200;
@@ -114,6 +113,13 @@
                 @endif
             @endauth
         @endif
+                <li class="nav-item active my-2 my-lg-0">
+                    <form method="post" action="{{ route('searchChamp') }}" class="form-inline my-2 my-lg-0">
+                        @csrf
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search by champion" aria-label="Search" name="champion">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    </form>
+                </li>
                 </ul>
         </div>
         </nav>
