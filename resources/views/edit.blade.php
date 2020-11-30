@@ -21,9 +21,9 @@
     </div>
 </div> --}}
 <div class="form-control">
-    <form action="{{ route('updatepost') }}" method="POST" class="form-control" enctype="multipart/form-data">
+    <form action="{{ route('updatepost') }}" method="POST" class="form-group" enctype="multipart/form-data">
         @csrf
-        <input type="hidden" name="id" value="{{$posts->id}}">
+        <input type="hidden" class="form-control mt-2" name="id" value="{{$posts->id}}">
         <input type="text" name="description" class="form-control mt-2" value="{{ $posts->description }}">      
         <input type="text" name="champion" class="form-control mt-2" value="{{ $posts->champion }}">
         <button type="submit" class="btn btn-primary mt-2">edit post</button>        

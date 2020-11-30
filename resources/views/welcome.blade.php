@@ -136,7 +136,12 @@
             <div class="container card mt-2" style="width: 32rem;">
             <img src="{{ asset('images')."/".$post->img_url }}" class="card-img-top" alt="img not found">
                 <div class="card-body">
-                    <h5 class="card-title">{{ $post->champion }} // {{$post["OwnerUser"]["username"]}} </h5>
+                    <h5 class="card-title">{{ $post->champion }}</h5>
+                    <form action="{{ route('profile') }}" method="post">
+                        @csrf
+                        <input type="hidden" name="id" value="{{$post["OwnerUser"]["id"]}}">
+                        <button> {{$post["OwnerUser"]["username"]}} </button>
+                    </form>
                     <p>{{$post->description}}</p>
                     <p id="likes{{$post->id}}">{{$post["like"]->count()}}</p>
                     @csrf

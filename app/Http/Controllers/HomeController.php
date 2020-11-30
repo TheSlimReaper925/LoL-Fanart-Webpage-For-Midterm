@@ -25,7 +25,7 @@ class HomeController extends Controller
 
     public function testpage()
     {
-        return Posts::with(['OwnerUser','like'])->get();   
+        return Posts::with(['OwnerUser','like'])->orderBy('created_at', 'desc')->get();   
     }
 
     /**
